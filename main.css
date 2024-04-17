@@ -10,33 +10,23 @@
     --primary-darker: #076DF2;
     font-size: 16px;
     font-family: "Lora", serif;
+    --shadow: 9px 9px 8px #e6e6e6, -12px -12px 12px #fefefe;
+    --shadow-hover: 4px 4px 4px #DDDDDD, -8px -8px 8px #fefefe;
+    --shadow-active: 15px 15px 14px #ededed, -15px -15px 14px #f7f7f7;
+    --inner-shadow-hover: inset 4px 4px 8px #dedede, inset -4px -4px 8px #f7f7f7;
+    --inner-shadow: inset 12px 12px 12px #e8e8e8, inset -12px -12px 16px #fefefe;
+    ;
 }
 
-h1 {
-    font-size: 2.98rem;
-}
 
-h2 {
-    font-size: 2.48rem;
-}
 
 h3 {
     font-size: 2.074rem;
+    font-family: "roboto", sans-serif;
+    font-weight: 300;
 }
 
-h4 {
-    font-size: 1.72rem;
-}
 
-h1, h2, h3, h4 {
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-}
-
-p {
-    font-size: 1rem;
-    font-family: "Lora", serif;
-}
 
 .shodow {
     box-shadow: 0px 1px 1px rgba(13, 13, 13, 0.01),
@@ -53,7 +43,7 @@ p {
 #root {
     width: 100dvw;
     height: 100dvh;
-    background-color: #F2F2F2;
+    background-color: var(--white);
     color: var(--black);
     display: flex;
     flex-direction: column;
@@ -61,9 +51,57 @@ p {
     justify-content: center;
 }
 
-main {
+
+nav {
     padding: 60px;
     min-width: 40dvw;
-    background-color: red;
+    /* background-color: red; */
     border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    background-color: var(--white);
+
+    a {
+        background-color: var(--white);
+        flex: 0 1 calc(33% - 4rem);
+        /* background-color: aqua; */
+        padding: 1.6rem 0.4rem;
+        box-shadow: var(--shadow);
+        border-radius: 8px;
+        color: var(--primary);
+
+
+
+        img {
+            max-width: 100px;
+            padding: 1rem;
+        }
+    }
+
+    a:hover {
+
+        box-shadow: var(--inner-shadow-hover);
+
+    }
+}
+
+@media screen and (max-width: 960px) {
+    h3 {
+        font-size: 1rem;
+    }
+
+    nav {
+        padding: 1rem;
+        width: 100dvw;
+        gap: 1.2rem;
+
+        a {
+            flex: 0 1 calc(50% - 1.4rem);
+            padding: 0.8rem 0.4rem
+        }
+    }
 }

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elektrik - CBAM Tax Calc || Bulut Pektemir</title>
+    <link rel="stylesheet" href="../reset.css">
+    <link rel="stylesheet" href="../calc.css">
+
+
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="root">
+        <nav>
+            <a href="/" id="back-button">
+                <object data="../back.svg" width="16px" height="20px" type="image/svg+xml"></object>
+            </a>
+            <a href="/demir/" >
+
+                Demir - Çelik
+            </a>
+            <a href="/alimunyum/" >
+
+
+                Alimunyum
+
+            </a>
+            <a href="/gubre/">
+
+                Gübre
+
+
+            </a>
+            <a href="/elektrik/" class="active">
+
+                Elektrik
+
+
+            </a>
+            <a href="/hidrojen/">
+
+                Hidrojen
+
+
+            </a>
+            <a href="/cimento/" >
+
+                Çimento
+
+
+            </a>
+
+
+        </nav>
+        <main>
+
+
+
+
+
+            <form action="" id="input-form" method="">
+
+                <label for="product-code">Product Code
+                    <input type="text" name="product-code" id="product-code" placeholder="(e.g., CN 073)">
+                </label>
+
+                <label for="produced-amount">Produced Amount
+                    <input type="text" name="produced-amount" id="produced-amount" placeholder="(3 Months)">
+                </label>
+
+                <label for="scope-two">Scope 2 Electricity Usage
+                    <input type="text" name="scope-two" id="scope-two" placeholder="(3 Months)">
+                </label>
+
+                <label for="scope-three">Scope 3 Amount
+                    <input type="text" name="scope-three" id="scope-three" placeholder="(3 Months)">
+                </label>
+
+                <label class="buttons-container">
+
+                    <input type="reset" value="Reset" class="reset-button">
+                    <input type="submit" value="Calculate">
+                </label>
+
+            </form>
+
+            <div id="result-container">
+                <h4>CBAM Tax:</h4>
+                <h4 id="result-value"></h4>
+
+            </div>
+
+
+
+
+        </main>
+
+
+    </div>
+
+</body>
+
+</html>

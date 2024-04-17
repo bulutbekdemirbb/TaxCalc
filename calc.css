@@ -1,0 +1,224 @@
+/* utilitys */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --black: #0D0D0D;
+    --white: #F2F2F2;
+    --primary: #3889F2;
+    font-size: 16px;
+    font-family: "Lora", serif;
+    --shadow: 9px 9px 8px #e6e6e6, -12px -12px 12px #fefefe;
+    --shadow-hover: 4px 4px 4px #DDDDDD, -8px -8px 8px #fefefe;
+    --shadow-active: 15px 15px 14px #ededed, -15px -15px 14px #f7f7f7;
+    --inner-shadow-hover: inset 4px 4px 8px #dedede, inset -4px -4px 8px #f7f7f7;
+    --inner-shadow: inset 12px 12px 12px #e8e8e8, inset -12px -12px 16px #fefefe;
+    ;
+}
+
+h4 {
+    font-size: 1.72rem;
+}
+
+
+/* page */
+
+
+#root {
+    width: 100dvw;
+    height: 100dvh;
+    background-color: var(--white);
+    color: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0px;
+    gap: 2rem;
+}
+
+nav {
+    width: 80%;
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    -webkit-box-shadow: var(--shadow);
+    /* WebKit için box-shadow */
+    padding: 0.8rem;
+    border-radius: 20px;
+
+    gap: 2rem;
+    display: flex;
+    display: -webkit-flex;
+    /* WebKit için flex */
+
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 1.2rem;
+    font-family: "roboto", sans-serif;
+
+    #back-button {
+        display: none;
+    }
+
+    a {
+        padding: 0.8rem;
+        flex: 1 1 auto;
+        text-align: center;
+        border-radius: 999px;
+    }
+
+    a:hover {
+
+        color: var(--primary);
+
+    }
+
+    a.active {
+        box-shadow: var(--shadow);
+        color: var(--primary);
+
+    }
+}
+
+main {
+    width: 80%;
+    box-shadow: var(--shadow);
+    -webkit-box-shadow: var(--shadow);
+    border-radius: 20px;
+    padding: 4rem;
+    flex: 1 0 auto;
+
+    div {
+        padding: 0.4rem 2rem;
+    }
+}
+
+form {
+    display: flex;
+    gap: 1rem 4rem;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    label {
+        display: flex;
+        display: -webkit-flex;
+        /* WebKit için flex */
+
+        flex-direction: column;
+        gap: 12px;
+        flex: 0 1 calc(50% - 4rem);
+        font-family: "Roboto", sans-serif;
+
+        input {
+            box-shadow: var(--inner-shadow);
+            -webkit-box-shadow: var(--inner-shadow);
+            /* WebKit için inner-shadow */
+            flex: 1 0 50%;
+            padding: 1rem 2rem;
+            border-radius: 2rem;
+            border: none;
+            font-size: 1rem;
+            color: var(--black)
+        }
+
+        input:focus {
+            box-shadow: var(--inner-shadow-hover);
+            outline: none;
+            -webkit-box-shadow: var(--inner-shadow-hover);
+            /* WebKit için inner-shadow-hover */
+
+        }
+
+    }
+
+    .buttons-container {
+        width: 100%;
+        flex-direction: row;
+        gap: 12px;
+        flex: 1 0 auto;
+        padding-top: 1rem;
+
+        input {
+            box-shadow: var(--shadow-hover);
+            -webkit-box-shadow: var(--shadow-hover);
+            padding: 16px 0px;
+            color: var(--primary);
+            width: 50%;
+            flex: 1 0 auto;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-family: "roboto", sans-serif;
+        }
+
+        input[type=submit]:hover {
+            box-shadow: var(--shadow);
+            -webkit-box-shadow: var(--shadow);
+        }
+
+        input[type=submit]:active {
+            box-shadow: var(--shadow-active);
+            -webkit-box-shadow: var(--shadow-active);
+        }
+
+        input[type=reset]:focus {
+            box-shadow: var(--shadow-active);
+            -webkit-box-shadow: var(--shadow-active);
+        }
+
+
+    }
+
+}
+
+
+
+#result-container {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+}
+
+@media only screen and (max-width: 1200px) {
+
+    #root {
+        width: unset;
+        height: unset;
+        min-height: 100dvh;
+        overflow-y: auto;
+    }
+
+    main {
+        padding: 20px;
+        width: 90%;
+    }
+
+
+    nav {
+        padding: 1rem;
+        width: 90dvw;
+        gap: 0.8rem;
+
+        a.active {
+            padding: 0.8rem 0px;
+            position: relative;
+            flex: 4 1 auto;
+        }
+
+
+        a:not(.active) {
+            display: none;
+        }
+
+        #back-button {
+            display: block;
+            flex: 1 1 auto;
+            box-shadow: var(--shadow);
+            -webkit-box-shadow: var(--shadow);
+            color: var(--primary);
+        }
+    }
+
+}
