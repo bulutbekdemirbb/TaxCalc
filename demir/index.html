@@ -91,10 +91,18 @@
             </form>
 
             <div id="result-container">
-                <h4>CBAM Tax:</h4>
-                <h4 id="result-value"></h4>
+
+                <div id="tax-container">
+                    <h4>CBAM Tax:</h4>
+                    <h4 id="result-value"></h4>
+                </div>
+
+                <div id="pie-graph-container">
+                </div>
 
             </div>
+
+
 
 
 
@@ -104,6 +112,196 @@
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const emissionFactors = {
+            "CN001": 1,
+            "CN002": 1.2,
+            "CN003": 0.8,
+            "CN004": 1.4,
+            "CN005": 1.6,
+            "CN006": 1.7,
+            "CN007": 0.4,
+            "CN008": 0.2,
+            "CN009": 0.1,
+            "CN010": 0.05,
+            "CN011": 2.4,
+            "CN012": 1.3,
+            "CN013": 4.2,
+            "CN014": 3.2,
+            "CN015": 2.3,
+            "CN016": 1.7,
+            "CN017": 1.9,
+            "CN018": 6.5,
+            "CN019": 3.21,
+            "CN020": 2.31,
+            "CN021": 5.12,
+            "CN022": 4.44,
+            "CN023": 9.4,
+            "CN024": 4.54,
+            "CN025": 9.00,
+            "CN026": 6.00,
+            "CN027": 4.23,
+            "CN028": 9.32,
+            "CN029": 13.2,
+            "CN030": 10.2,
+            "CN031": 4.25,
+            "CN032": 5.66,
+            "CN033": 8.74,
+            "CN034": 0.06,
+            "CN035": 0.02,
+            "CN036": 0.03,
+            "CN037": 0.23,
+            "CN038": 0.94
+        };
+
+        const weeklyETSTax = 50; // birimi euro
+        const emissionLimit = 1323382; // birimi milyon ton CO2
+        const scope2Factor = 2.44; // birimi ton başına CO2
+        const scope3Factor = 3.02; // birimi ton başına CO2
+
+        let resultValEl = document.getElementById('result-value');
+        let pieContEl = document.getElementById('pie-graph-container')
+
+
+
+
+
+
+        let createGraph = (data) => {
+
+            // canvas oluştur
+
+            const canvas = document.createElement('canvas');
+            canvas.id = 'myChart';
+            pieContEl.appendChild(canvas);
+            const ctx = document.getElementById('myChart');
+
+            // grafik oluştur
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Scope 1', 'Scope 2', 'Scope 3'],
+                    datasets: [{
+                        data: data,
+                        backgroundColor: [
+                            '#CEF238',
+                            '#F24A38',
+                            '#3889F2'
+                        ],
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+
+                    },
+
+                },
+            }
+            );
+
+        }
+
+
+
+
+        function calculateCBAMTax(productCode, producedAmount, scope2Electricity, scope3Amount) {
+
+            // hesaplamayı yap
+
+            const emissionFactor = emissionFactors[productCode];
+
+            let scopeOneRes = (producedAmount * emissionFactor);
+            let scopeTwoRes = (scope2Electricity * scope2Factor);
+            let scopeThreeRes = (scope3Amount * scope3Factor);
+
+            const totalEmission = scopeOneRes + scopeTwoRes + scopeThreeRes;
+
+            let cbamTax = 0;
+            if (totalEmission > emissionLimit) {
+                cbamTax = (totalEmission - emissionLimit) * weeklyETSTax * producedAmount;
+            }
+
+            // hesap sonucunu ekrana bas
+            resultValEl.innerHTML = cbamTax;
+
+            let data = [scopeOneRes, scopeTwoRes, scopeThreeRes]
+
+            // grafik oluşturucu fonksiyonu çağır
+            createGraph(data);
+
+        }
+
+
+        // form submit olduğunda
+        let formSubmit = (e) => {
+
+            // varsayılan davranış sıfırla
+            e.preventDefault();
+
+            // sonuçları sıfırla
+            resultValEl.innerHTML = ""
+            pieContEl.innerHTML = ""
+
+            // inputları yakala
+            const productCode = document.getElementById("product-code").value;
+            const producedAmount = document.getElementById("produced-amount").value;
+            const scope2Electricity = document.getElementById("scope-two").value;
+            const scope3Amount = document.getElementById("scope-three").value;
+
+            // productCode boşluk sil
+            function convertToValidFormat(input) {
+                return input.replace(/\s+/g, '').toUpperCase();
+            }
+
+            let convertedProductCode = convertToValidFormat(productCode)
+
+            // productCode var mı kontrol et
+            checkEmissionFactor(convertedProductCode);
+
+
+            function checkEmissionFactor(productCode) {
+                if (emissionFactors.hasOwnProperty(productCode)) {
+                    // productCode doğru ise hesaplama fonksiyonunu çalıştır
+                    calculateCBAMTax(convertedProductCode, producedAmount, scope2Electricity, scope3Amount)
+                } else {
+                    // productCode yanlış ise uyarı ver
+                    alert("Please Check The Product Code. The product code must start with 'cn'. The relevant number must be 3 digits. Example: 'CN001'")
+                }
+            }
+
+
+
+
+
+
+
+
+        }
+
+
+
+        let formEl = document.getElementById('input-form');
+        formEl.addEventListener('submit', (e) => formSubmit(e));
+        formEl.addEventListener('reset', (e) => formReset(e));
+
+
+        // form reset olduğunda
+        function formReset(e) {
+            resultValEl.innerHTML = ""
+            pieContEl.innerHTML = ""
+
+        }
+
+
+
+
+    </script>
 </body>
 
 </html>
