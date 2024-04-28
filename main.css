@@ -42,7 +42,7 @@ h3 {
 
 #root {
     width: 100dvw;
-    height: 100dvh;
+    min-height: 100dvh;
     background-color: var(--white);
     color: var(--black);
     display: flex;
