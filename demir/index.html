@@ -1,120 +1,230 @@
 <!DOCTYPE html>
 <html lang="tr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Demir - CBAM Tax Calc || Bulut Pektemir</title>
-    <link rel="stylesheet" href="../reset.css">
-    <link rel="stylesheet" href="../calc.css">
+    <link rel="stylesheet" href="../reset.css" />
+    <link rel="stylesheet" href="../calc.css" />
 
+    <style></style>
+  </head>
 
-    <style>
-
-    </style>
-</head>
-
-<body>
-
+  <body>
     <div id="root">
-        <nav>
-            <a href="/" id="back-button">
-                <object data="../back.svg" width="16px" height="20px" type="image/svg+xml"></object>
-            </a>
-            <a href="/demir/" class="active">
+      <nav class="bg">
+        <a href="/" id="back-button">
+          <object
+            data="../back.svg"
+            width="16px"
+            height="20px"
+            type="image/svg+xml"
+          ></object>
+        </a>
+        <a href="/demir/" class="active"> Demir - Çelik </a>
+        <a href="/alimunyum/"> Alimunyum </a>
+        <a href="/gubre/"> Gübre </a>
+        <a href="/elektrik/"> Elektrik </a>
+        <a href="/hidrojen/"> Hidrojen </a>
+        <a href="/cimento/"> Çimento </a>
+      </nav>
 
-                Demir - Çelik
-            </a>
-            <a href="/alimunyum/">
+      <form id="mainForm">
+        <!-- ÜSTTEKİ GENEL ALAN Start -->
+        <section class="bg">
+          <label for="amountExported">
+            Amount Exported
+            <input
+              type="text"
+              name="amountExported"
+              id="amountExported"
+              placeholder="(e.g., CN 073)"
+              value="50"
+            />
+          </label>
 
+          <label for="weekly-ETS-price"
+            >weekly ETS price
+            <input
+              type="text"
+              name="weeklyETSPrice"
+              id="weekly-ETS-price"
+              placeholder="(e.g., CN 073)"
+              value="50"
+            />
+          </label>
 
-                Alimunyum
+          <label for="emissionCap"
+            >emission cap
+            <input
+              type="text"
+              name="emissionCap"
+              id="emissionCap"
+              placeholder="(e.g., CN 073)"
+              value=" 50"
+            />
+          </label>
+        </section>
+        <!-- ÜSTTEKİ GENEL ALAN End -->
 
-            </a>
-            <a href="/gubre/">
+        <div class="scopes-provider">
+          <div class="bg scope-one">
+            <h4>Scope 1</h4>
 
-                Gübre
+            <!-- YENİ ALAN İÇİN BURAYI KOPYALA -->
 
+            <!-- HATIRLATMALAR -->
+            <!-- #1 Label'ın For'u Input'un ID'si İle aynı olmalı -->
+            <!-- #2 taxtCalc.JS Dosyasında Input Name ile yakalanacak -->
+            <!-- #3 Input'un palaceholder düzenlenmeli -->
 
-            </a>
-            <a href="/elektrik/">
+            <!-- ---------------------------------------------------------------- -->
 
-                Elektrik
+            <label for="palletisationOperation"
+              >palletisationOperation
+              <input
+                type="number"
+                name="palletisationOperation"
+                id="palletisationOperation"
+                placeholder="(e.g., CN 073)"
+                value="0"
+              />
+            </label>
 
+            <!-- ---------------------------------------------------------------- -->
+            <!-- YENİ ALAN İÇİN BURAYI KOPYALA -->
 
-            </a>
-            <a href="/hidrojen/">
+            <label for="cokeOvengasCombusition"
+              >cokeOvengasCombusition
+              <input
+                type="number"
+                name="cokeOvengasCombusition"
+                id="cokeOvengasCombusition"
+                placeholder="(e.g., CN 073)"
+                value="0"
+              />
+            </label>
 
-                Hidrojen
+            <label for="blastFurnaceGasCombustion"
+              >BlastFurnaceGasCombustion
+              <input
+                type="text"
+                name="blastFurnaceGasCombustion"
+                id="blastFurnaceGasCombustion"
+                placeholder="(e.g., CN 073)"
+                value="0"
+              />
+            </label>
+          </div>
 
+          <div class="bg scope-two">
+            <h4>Scope 2</h4>
 
-            </a>
-            <a href="/cimento/">
+            <label for="electricityForProductionProcess"
+              >ElectricityForProductionProcess
+              <input
+                type="text"
+                name="electricityForProductionProcess"
+                id="electricityForProductionProcess"
+                placeholder="(e.g., CN 073)"
+                value="0"
+              />
+            </label>
 
-                Çimento
+            <label for="electricityForLigting"
+              >ElectricityForLigting
+              <input
+                type="text"
+                name="electricityForLigting"
+                id="electricityForLigting"
+                placeholder="(e.g., CN 073)"
+                value="0"
+              />
+            </label>
+          </div>
 
+          <div class="bg scope-three">
+            <h4>Scope 3</h4>
 
-            </a>
+            <label for="rawMaterialTransportation"
+              >RawMaterialTransportation
+              <input
+                type="text"
+                name="rawMaterialTransportation"
+                id="rawMaterialTransportation"
+                placeholder="(e.g., CN 073)"
+                value="0"
+              />
+            </label>
 
+            <label for="employeeCommuting">
+              EmployeeCommuting
+              <input
+                type="text"
+                name="employeeCommuting"
+                id="employeeCommuting"
+                placeholder="(e.g., CN 073)"
+                value="0"
+              />
+            </label>
+          </div>
+        </div>
 
-        </nav>
-        <main>
+        <section class="bg buttons">
+          <button type="reset">Reset</button>
+          <button type="submit">Submit</button>
+        </section>
+      </form>
 
+      <h4>Sonuçlar</h4>
+      <output id="outputArea">
+        <!-- <div class="total-em-result bg">
+          <p>Total Em</p>
+          <h4>Total Em</h4>
+        </div>
 
+        <div class="tax-result bg">
+          <p>asd</p>
+          <h4>Tax Res</h4>
+        </div>
 
-
-
-            <form action="" id="input-form" method="">
-
-                <label for="product-code">Product Code
-                    <input type="text" name="product-code" id="product-code" placeholder="(e.g., CN 073)">
-                </label>
-
-                <label for="produced-amount">Produced Amount
-                    <input type="text" name="produced-amount" id="produced-amount" placeholder="(3 Months)">
-
-                                    </label>
-
-                <label for="scope-two">Scope 2 Electricity Usage
-                    <input type="text" name="scope-two" id="scope-two" placeholder="(3 Months)">
-                </label>
-
-                <label for="scope-three">Scope 3 Amount
-                    <input type="text" name="scope-three" id="scope-three" placeholder="(3 Months)">
-                </label>
-
-                <label class="buttons-container">
-
-                    <input type="reset" value="Reset" class="reset-button">
-                    <input type="submit" value="Calculate">
-                </label>
-
-            </form>
-
-            <div id="result-container">
-
-                <div id="tax-container">
-                    <h4>CBAM Tax:</h4>
-                    <h4 id="result-value"></h4>
-                </div>
-
-                <div id="pie-graph-container">
-                </div>
-
-            </div>
-
-
-
-
-
-
-        </main>
-
-
+        <div class="graph-result bg">
+          <p>asd</p>
+          <h4>graph</h4>
+        </div>
+        <div class="emission-cap bg">
+          <p>asd</p>
+          <h4>emission-cap</h4>
+        </div>
+        <div class="emission-cap-percent bg">
+          <p>asd</p>
+          <h4>emission-cap percent</h4>
+        </div>
+        <div class="wekly bg">
+          <p>asd</p>
+          <h4>Weekly</h4>
+        </div>
+        <div class="scope-one-result bg">
+          <p>asd</p>
+          <h4>Scope1 Res</h4>
+        </div>
+        <div class="scope-two-result bg">
+          <p>asd</p>
+          <h4>Scope2 Res</h4>
+        </div>
+        <div class="scope-three-result bg">
+          <p>asd</p>
+          <h4>Scope3 Res</h4>
+        </div>
+        <div class="scope-all-result bg">
+          <p>asd</p>
+          <h4>all Scopes Res</h4>
+        </div> -->
+      </output>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
+    <!-- <script>
         const emissionFactors = {
             "CN001": 1,
             "CN002": 1.2,
@@ -179,7 +289,8 @@
             const ctx = document.getElementById('myChart');
 
             // grafik oluştur
-            new Chart(ctx, {
+            new Chart(ctx, 
+            {
                 type: 'doughnut',
                 data: {
                     labels: ['Scope 1', 'Scope 2', 'Scope 3'],
@@ -302,7 +413,7 @@
 
 
 
-    </script>
-</body>
-
+    </script> -->
+    <script src="./taxCalc.js" defer></script>
+  </body>
 </html>
