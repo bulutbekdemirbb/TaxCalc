@@ -20,7 +20,9 @@ function CalculateTatalAllScopes(userInput) {
 
     let scopeOneTotal = (Number(userInput.palletisationOperation) * 0.03) +
         (Number(userInput.cokeOvengasCombusition) * 1.6) +
-        (Number(userInput.blastFurnaceGasCombustion) * 1.35)
+        (Number(userInput.blastFurnaceGasCombustion) * 1.35) +
+        (Number(userInput.directReducedIronProduction) * 0.7) 
+
        
         ;
 
